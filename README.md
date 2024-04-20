@@ -13,7 +13,7 @@ g++ Main.cpp -o MyExe.exe
 ### C#
 
 ```bash
-g++ Main.cpp -o MyExe.exe
+dotnet build Path -c Release
 ```
 
 ### Rust
