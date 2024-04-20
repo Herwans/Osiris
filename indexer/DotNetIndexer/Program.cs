@@ -1,10 +1,13 @@
 ﻿using DotNetIndexer;
 
+if (args.Count() < 2)
+{
+    Console.WriteLine("Not enough arguments");
+    return;
+}
+
 Console.WriteLine(".NET Indexer");
 Directory.CreateDirectory("output/dotnet/temp");
 
-foreach (string argument in args)
-{
-    await Indexer.GetDirectoryContentAsync(argument);
-}
-Indexer.Merge();
+await Indexer.GetDirectoryContentAsync(args[1]);
+Indexer.Merge(args[0]);

@@ -10,6 +10,12 @@ Small project to benchmark things.
 g++ Main.cpp -o MyExe.exe
 ```
 
+### C#
+
+```bash
+g++ Main.cpp -o MyExe.exe
+```
+
 ### Rust
 
 ```bash
