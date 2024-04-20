@@ -2,12 +2,22 @@
 
 Small project to benchmark things.
 
-## Compilation
+## Commands
 
 ### C++
 
 ```bash
 g++ Main.cpp -o MyExe.exe
+```
+
+### Rust
+
+```bash
+# Debug
+cargo run
+
+# Compile
+cargo build --release
 ```
 
 ## Indexer
