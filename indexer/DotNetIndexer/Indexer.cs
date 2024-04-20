@@ -20,13 +20,11 @@ namespace DotNetIndexer
             });
         }
 
-        public static void Merge()
+        public static void Merge(string output)
         {
-            string path = Path.Combine("output", "dotnet");
-            string resultFile = Path.Combine(path, "result.txt");
-            string[] files = Directory.GetFiles(Path.Combine(path, "temp"));
+            string[] files = Directory.GetFiles(Path.Combine("output", "dotnet", "temp"));
 
-            using var outputStream = File.Create(resultFile);
+            using var outputStream = File.Create(output);
             foreach (string file in files)
             {
                 using var inputStream = File.OpenRead(file);
