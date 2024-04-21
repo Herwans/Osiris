@@ -7,7 +7,7 @@ if (args.Count() < 2)
 }
 
 Console.WriteLine(".NET Indexer");
-Directory.CreateDirectory("output/dotnet/temp");
+Directory.CreateDirectory("dotnet/temp");
 
 await Indexer.GetDirectoryContentAsync(args[1]);
 Indexer.Merge(args[0]);
