@@ -4,14 +4,13 @@ namespace DotNetIndexer
     {
         public static async Task GetDirectoryContentAsync(string path)
         {
-            string file = Path.Combine("output", "dotnet", "temp", Guid.NewGuid() + ".txt");
+            string file = Path.Combine("dotnet", "temp", Guid.NewGuid() + ".txt");
             try
             {
                 await File.WriteAllLinesAsync(file, Directory.GetFiles(path));
             }
-            catch (IOException e)
+            catch (IOException)
             {
-                Console.WriteLine("Error : " + e.Message);
             }
 
             await Parallel.ForEachAsync(GetDirectories(path), async (dir, _) =>
@@ -22,14 +21,18 @@ namespace DotNetIndexer
 
         public static void Merge(string output)
         {
-            string[] files = Directory.GetFiles(Path.Combine("output", "dotnet", "temp"));
+            string[] files = Directory.GetFiles(Path.Combine("dotnet", "temp"));
 
             using var outputStream = File.Create(output);
             foreach (string file in files)
             {
                 using var inputStream = File.OpenRead(file);
                 inputStream.CopyTo(outputStream);
+                inputStream.Dispose();
+                File.Delete(file);
             }
+
+            Directory.Delete(Path.Combine("dotnet", "temp"));
         }
 
         public static string[] GetFiles(string path)
