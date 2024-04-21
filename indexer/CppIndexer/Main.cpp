@@ -7,11 +7,9 @@ int main(int argc, char *argv[])
 {
     if (sizeof(*argv) < 3)
     {
-        std::cout << "Not enough arguments" << std::endl;
+        std::cerr << "Not enough arguments" << std::endl;
         return 1;
     }
-
-    std::cout << "Indexer C++" << std::endl;
 
     int countFile = 0;
     int countDir = 0;
@@ -20,7 +18,10 @@ int main(int argc, char *argv[])
     outputFile.open(argv[1]);
     for (const auto &file : std::filesystem::recursive_directory_iterator(argv[2]))
     {
-        outputFile << file.path() << "\n";
+        if (!file.is_directory())
+        {
+            outputFile << file.path().string() << "\n";
+        }
     }
     outputFile.close();
 
